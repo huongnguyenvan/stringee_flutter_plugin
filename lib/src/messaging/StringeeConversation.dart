@@ -194,7 +194,11 @@ class StringeeConversation {
       List<dynamic> msgArray = result['body'];
       for (int i = 0; i < msgArray.length; i++) {
         StringeeMessage msg = StringeeMessage.fromJson(msgArray[i]);
-        messages.add(msg);
+        if (Platform.isAndroid) {
+          messages.insert(0, msg);
+        } else {
+          messages.add(msg);
+        }
       }
       result['body'] = messages;
     }
